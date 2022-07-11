@@ -30,11 +30,11 @@ Promise.all(
 // ----------------------- Part Two -----------------------------
 // ===============================================================
 
-let cardsBaseURL = 'https://deckofcardsapi.com/api/deck';
+let cardsApiUrl = 'https://deckofcardsapi.com/api/deck';
 
 // 1.
 
-$.getJSON(`${cardsBaseURL}/new/draw/`).then(data => {
+$.getJSON(`${cardsApiUrl}/new/draw/`).then(data => {
   let card = data.cards[0]
   console.log(`${card.value} of ${card.suit}`);
 });
@@ -50,11 +50,11 @@ function useCards(){
   })
 }
 
-$.getJSON(`${cardsBaseURL}/new/draw/`)
+$.getJSON(`${cardsApiUrl}/new/draw/`)
   .then(data => {
     cards.push(data.cards[0])
     deckId = data.deck_id
-    return $.getJSON(`${cardsBaseURL}/${deckId}/draw/`)
+    return $.getJSON(`${cardsApiUrl}/${deckId}/draw/`)
   })
   .then(data => {
     cards.push(data.cards[0])
@@ -66,7 +66,7 @@ $.getJSON(`${cardsBaseURL}/new/draw/`)
 let deckIdentifier = ''
 
 function startGame(){
-    $.getJSON(`${cardsBaseURL}/new/draw/`)
+    $.getJSON(`${cardsApiUrl}/new/draw/`)
     .then(data => {
       card = data.cards[0]
       deckIdentifier = data.deck_id
@@ -75,7 +75,7 @@ function startGame(){
 }
 
 function drawCard(){
-    $.getJSON(`${cardsBaseURL}/${deckIdentifier}/draw`)
+    $.getJSON(`${cardsApiUrl}/${deckIdentifier}/draw`)
     .then(data => {
       card = data.cards[0]
       $('#card-container').append(`<img src='${card.image}' width=150px height=300px>`)
